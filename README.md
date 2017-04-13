@@ -3,7 +3,7 @@
 [![npm license](https://img.shields.io/npm/l/hxd.svg?style=flat-square)](https://npmjs.com/package/hxd)
 [![npm downloads](https://img.shields.io/npm/dm/hxd.svg?style=flat-square)](https://npmjs.com/package/hxd)
 
-### Install via [npm](https://npmjs.com)
+## Install via [npm](https://npmjs.com)
 
 ```sh
 $ npm install --global hxd
@@ -38,3 +38,12 @@ fs.createReadStream( filename )
   .pipe( hexStream )
   .pipe( process.stdout )
 ```
+
+## Todo
+
+- [ ] Improve performance even further
+- [ ] Add command line flags for options, usage & version
+- [ ] Display offset in bytes of repetitions instead of line count
+- [ ] Add a screenshot or output samples to the README
+- [ ] Add tests
+- [ ] ...
