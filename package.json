@@ -1,0 +1,32 @@
+{
+  "name": "hxd",
+  "version": "0.0.0",
+  "description": "Hexdump",
+  "license": "MIT",
+  "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de/)",
+  "keywords": [
+    "hex",
+    "hexdump"
+  ],
+  "main": "lib/hxd",
+  "dependencies": {},
+  "devDependencies": {
+    "nanobench": "^2.1.0"
+  },
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "homepage": "https://github.com/jhermsmeier/hxd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jhermsmeier/hxd.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jhermsmeier/hxd/issues"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "hxd": "bin/hxd.js"
+  }
+}
