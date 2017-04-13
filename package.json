@@ -1,12 +1,13 @@
 {
   "name": "hxd",
   "version": "1.0.0",
-  "description": "Hexdump",
+  "description": "Streaming hexdump CLI",
   "license": "MIT",
   "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de)",
   "keywords": [
     "hex",
-    "hexdump"
+    "hexdump",
+    "cli",
   ],
   "main": "lib/hxd",
   "dependencies": {},
