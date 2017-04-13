@@ -42,6 +42,19 @@ bench( `Hxd.upperCase() ⨉ ${ITERATIONS}`, function( run ) {
 
 })
 
+bench( `Hxd.asciiChar() ⨉ ${ITERATIONS}`, function( run ) {
+
+  var code = Math.random() * 256
+  var output = null
+
+  run.start()
+  for( var i = 0; i < ITERATIONS; i++ ) {
+    output = Hxd.asciiChar( code )
+  }
+  run.end()
+
+})
+
 bench( `Hxd.ascii() ⨉ ${ITERATIONS}`, function( run ) {
 
   var hex = require('crypto').randomBytes(16).toString('hex')
