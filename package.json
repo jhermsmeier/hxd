@@ -7,7 +7,7 @@
   "keywords": [
     "hex",
     "hexdump",
-    "cli",
+    "cli"
   ],
   "main": "lib/hxd",
   "dependencies": {},
