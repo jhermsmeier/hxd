@@ -10,3 +10,8 @@ var readStream = filename ?
 
 readStream.pipe( new Hxd() )
   .pipe( process.stdout )
+  .on( 'error', function( error ) {
+    if( error.code === 'EPIPE' ) {
+      readStream.destroy()
+    }
+  })
