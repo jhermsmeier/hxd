@@ -10,7 +10,9 @@
     "cli"
   ],
   "main": "lib/hxd",
-  "dependencies": {},
+  "dependencies": {
+    "ansi-styles": "^3.1.0"
+  },
   "devDependencies": {
     "nanobench": "^2.1.0"
   },
