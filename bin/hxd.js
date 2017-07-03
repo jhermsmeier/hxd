@@ -13,7 +13,17 @@ var readStream = filename ?
   fs.createReadStream( filename ) :
   process.stdin
 
-readStream.pipe( new Hxd() )
+var options = {
+  color: process.stdout.isTTY
+}
+
+if( argv.includes( '--color' ) ) {
+  options.color = true
+} else if( argv.includes( '--no-color' ) ) {
+  options.color = false
+}
+
+readStream.pipe( new Hxd( options ) )
   .pipe( process.stdout )
   .on( 'error', function( error ) {
     if( error.code === 'EPIPE' ) {
