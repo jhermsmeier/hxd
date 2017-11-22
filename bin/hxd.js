@@ -3,30 +3,98 @@ var Hxd = require( '../lib/hxd' )
 var fs = require( 'fs' )
 var argv = process.argv.slice(2)
 
-var flags = argv.filter(( arg ) => {
-  return /^-/.test( arg )
-})
+function hasOpt( short, long ) {
+  return argv.includes( short ) ||
+    argv.includes( long )
+}
 
-if( flags.includes( '-v' ) || flags.includes( '--version' ) ) {
+function getOpt( short, long ) {
+  if( argv.includes( short ) )
+    return argv[ argv.indexOf( short ) + 1 ]
+  if( argv.includes( long ) )
+    return argv[ argv.indexOf( long ) + 1 ]
+}
+
+function parseNumber( value ) {
+  value = value + ''
+  if( /^0x/i.test( value ) ) {
+    return parseInt( value.replace( /^0x/i, '' ), 16 )
+  }
+  if( /^\d+\s*[KMGTPE]?B?/i.test( value ) ) {
+    var match = /^(\d+)\s*([KMGTPE]?)B?/i.exec( value )
+    var number = parseInt( match[1], 10 )
+    if( match[2] ) {
+      number *= parseNumber.unit[ match[2].toUpperCase() ]
+    }
+    return number
+  }
+  return parseInt( value, 10 )
+}
+
+parseNumber.unit = {
+  K: 1024,
+  M: 1024 * 1024,
+  G: 1024 * 1024 * 1024,
+  T: 1024 * 1024 * 1024 * 1024,
+  P: 1024 * 1024 * 1024 * 1024,
+  E: 1024 * 1024 * 1024 * 1024 * 1024,
+}
+
+if( hasOpt( '-v', '--version' ) ) {
   console.log( require( '../package.json' ).version )
   process.exit( 0 )
 }
 
-var options = {
-  color: flags.includes( '--color' ) || process.stdout.isTTY
+if( hasOpt( '-h', '--help' ) ) {
+  const USAGE = `
+  Usage: hxd [options] [file]
+
+  Options
+
+    -h, --help      Display help
+    -v, --version   Display version number
+
+    -s, --start     Start reading at the given offset
+    -e, --end       Read until the given offset
+    -l, --length    Read "length" bytes from start
+
+    --color         Render output with color
+    --no-color      Force-disable color output`
+  console.log( USAGE )
+  process.exit( 0 )
 }
 
-if( flags.includes( '--no-color' ) ) {
+var readOptions = {
+  start: hasOpt( '-s', '--start' ) ?
+    parseNumber( getOpt( '-s', '--start' ) ) : void 0,
+  end: hasOpt( '-e', '--end' ) ?
+    parseNumber( getOpt( '-e', '--end' ) ) - 1 : void 0,
+}
+
+if( hasOpt( '-l', '--length' ) ) {
+  readOptions.end = ( readOptions.start || 0 ) +
+    parseNumber( getOpt( '-l', '--length' ) ) - 1
+}
+
+if( readOptions.end ) {
+  readOptions.start = readOptions.start || 0
+}
+
+var options = {
+  lineNumbers: true,
+  dedupe: true,
+  ascii: true,
+  offset: readOptions.start || 0,
+  colors: hasOpt( '--color' ) || process.stdout.isTTY
+}
+
+if( hasOpt( '--no-color' ) ) {
   options.color = false
 }
 
-argv = argv.filter(( arg ) => {
-  return !/^-/.test( arg )
-})
-
-var filename = argv.shift()
+var filename = argv.pop()
 var readStream = filename ?
-  fs.createReadStream( filename ) :
+  fs.createReadStream( filename, readOptions ) :
   process.stdin
 
 var hexdump = new Hxd( options )
