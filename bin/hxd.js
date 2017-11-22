@@ -29,7 +29,16 @@ var readStream = filename ?
   fs.createReadStream( filename ) :
   process.stdin
 
-readStream.pipe( new Hxd( options ) )
+var hexdump = new Hxd( options )
+
+readStream.on('error', function( error ) {
+  var ansi = require( 'ansi-styles' )
+  var os = require( 'os' )
+  console.error( `${ansi.red.open}[ERROR]${ansi.red.close} ${error.message}` )
+  process.exit( os.constants.errno[error.code] || 1 )
+})
+
+readStream.pipe( hexdump )
   .pipe( process.stdout )
   .on( 'error', function( error ) {
     if( error.code === 'EPIPE' ) {
