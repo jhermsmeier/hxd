@@ -17,7 +17,7 @@ function getOpt( short, long ) {
 
 function parseNumber( value ) {
   value = value + ''
-  if( /^0x/i.test( value ) ) {
+  if( /^-?0x/i.test( value ) ) {
     return parseInt( value.replace( /^0x/i, '' ), 16 )
   }
   if( /^\d+\s*[KMGTPE]?B?/i.test( value ) ) {
@@ -64,11 +64,14 @@ if( hasOpt( '-h', '--help' ) ) {
   process.exit( 0 )
 }
 
+var filename = argv.pop()
+var stats = fs.statSync( filename )
+
 var readOptions = {
   start: hasOpt( '-s', '--start' ) ?
-    parseNumber( getOpt( '-s', '--start' ) ) : void 0,
+    parseNumber( getOpt( '-s', '--start' ) ) : 0,
   end: hasOpt( '-e', '--end' ) ?
-    parseNumber( getOpt( '-e', '--end' ) ) - 1 : void 0,
+    parseNumber( getOpt( '-e', '--end' ) ) - 1 : stats.size,
 }
 
 if( hasOpt( '-l', '--length' ) ) {
@@ -76,8 +79,12 @@ if( hasOpt( '-l', '--length' ) ) {
     parseNumber( getOpt( '-l', '--length' ) ) - 1
 }
 
-if( readOptions.end ) {
-  readOptions.start = readOptions.start || 0
+if( readOptions.start && readOptions.start < 0 ) {
+  readOptions.start += stats.size
+}
+
+if( readOptions.end && readOptions.end < 0 ) {
+  readOptions.end += stats.size
 }
 
 var options = {
@@ -92,7 +99,6 @@ if( hasOpt( '--no-color' ) ) {
   options.color = false
 }
 
-var filename = argv.pop()
 var readStream = filename ?
   fs.createReadStream( filename, readOptions ) :
   process.stdin
