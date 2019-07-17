@@ -59,7 +59,8 @@ if( hasOpt( '-h', '--help' ) ) {
     -l, --length    Read "length" bytes from start
 
     --color         Render output with color
-    --no-color      Force-disable color output`
+    --no-color      Force-disable color output
+    --prefix        Prefix output lines with a given value`
   console.log( USAGE )
   process.exit( 0 )
 }
@@ -92,7 +93,8 @@ var options = {
   dedupe: true,
   ascii: true,
   offset: readOptions.start || 0,
-  colors: hasOpt( '--color' ) || process.stdout.isTTY
+  colors: hasOpt( '--color' ) || process.stdout.isTTY,
+  prefix: getOpt( '--prefix' ),
 }
 
 if( hasOpt( '--no-color' ) ) {

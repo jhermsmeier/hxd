@@ -31,6 +31,7 @@ Options
 
   --color         Render output with color
   --no-color      Force-disable color output
+  --prefix        Prefix output lines with a given value
 ```
 
 ```sh
@@ -44,6 +45,8 @@ $ hxd -s 512K filename.bin
 $ hxd -s 0x200 -e 0x400 filename.bin
 # Read 1024 bytes from a given offset
 $ hxd -s 0xDEAD -l 1K filename.bin
+# Read the last 1024 bytes of a file
+$ hxd -s -1024 filename.bin
 ```
 
 ## Module Usage
