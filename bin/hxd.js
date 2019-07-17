@@ -20,8 +20,8 @@ function parseNumber( value ) {
   if( /^-?0x/i.test( value ) ) {
     return parseInt( value.replace( /^0x/i, '' ), 16 )
   }
-  if( /^\d+\s*[KMGTPE]?B?/i.test( value ) ) {
-    var match = /^(\d+)\s*([KMGTPE]?)B?/i.exec( value )
+  if( /-?\d+\s*[KMGTPE]?B?/i.test( value ) ) {
+    var match = /^(-?\d+)\s*([KMGTPE]?)B?/i.exec( value )
     var number = parseInt( match[1], 10 )
     if( match[2] ) {
       number *= parseNumber.unit[ match[2].toUpperCase() ]
