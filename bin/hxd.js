@@ -66,7 +66,7 @@ if( hasOpt( '-h', '--help' ) ) {
 }
 
 var filename = argv.pop()
-var stats = fs.statSync( filename )
+var stats = filename ? fs.statSync( filename ) : {}
 
 var readOptions = {
   start: hasOpt( '-s', '--start' ) ?
