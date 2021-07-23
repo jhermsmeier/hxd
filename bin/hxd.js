@@ -100,7 +100,7 @@ var options = {
 }
 
 if( hasOpt( '--no-color' ) ) {
-  options.colors = false
+  options.color = false
 }
 
 if( hasOpt( '-b', '--binary' ) ) {
