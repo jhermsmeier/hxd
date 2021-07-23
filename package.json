@@ -11,10 +11,10 @@
   ],
   "main": "lib/hxd",
   "dependencies": {
-    "ansi-styles": "^4.2.1"
+    "ansi-styles": "^4.3.0"
   },
   "devDependencies": {
-    "nanobench": "^2.1.0"
+    "nanobench": "^2.1.1"
   },
   "peerDependencies": {},
   "optionalDependencies": {},

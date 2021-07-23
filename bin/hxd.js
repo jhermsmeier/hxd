@@ -58,6 +58,7 @@ if( hasOpt( '-h', '--help' ) ) {
     -e, --end       Read until the given offset
     -l, --length    Read "length" bytes from start
 
+    -b, --binary    Binary digit dump
     --color         Render output with color
     --no-color      Force-disable color output
     --prefix        Prefix output lines with a given value`
@@ -93,12 +94,17 @@ var options = {
   dedupe: true,
   ascii: true,
   offset: readOptions.start || 0,
+  binary: false,
   colors: hasOpt( '--color' ) || process.stdout.isTTY,
   prefix: getOpt( '--prefix' ),
 }
 
 if( hasOpt( '--no-color' ) ) {
-  options.color = false
+  options.colors = false
+}
+
+if( hasOpt( '-b', '--binary' ) ) {
+  options.binary = true
 }
 
 var readStream = filename ?
