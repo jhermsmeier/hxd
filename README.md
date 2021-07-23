@@ -28,6 +28,7 @@ Options
   -s, --start     Start reading at the given offset
   -e, --end       Read until the given offset
   -l, --length    Read "length" bytes from start
+  -b, --binary    Binary digit dump
 
   --color         Render output with color
   --no-color      Force-disable color output
