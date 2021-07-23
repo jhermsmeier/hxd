@@ -1,7 +1,6 @@
-# hxd
+# hxd (hexdumper)
 [![npm](https://img.shields.io/npm/v/hxd.svg?style=flat-square)](https://npmjs.com/package/hxd)
 [![npm license](https://img.shields.io/npm/l/hxd.svg?style=flat-square)](https://npmjs.com/package/hxd)
-[![npm downloads](https://img.shields.io/npm/dm/hxd.svg?style=flat-square)](https://npmjs.com/package/hxd)
 
 <center>
 
@@ -9,16 +8,10 @@
 
 </center>
 
-## Install via [npm](https://npmjs.com)
-
-```sh
-$ npm install --global hxd
-```
-
 ## CLI Usage
 
 ```
-Usage: hxd [options] [file]
+Usage: node hxd [options] [file]
 
 Options
 
@@ -74,14 +67,3 @@ fs.createReadStream( filename )
   .pipe( hexStream )
   .pipe( process.stdout )
 ```
-
-## Todo
-
-- [x] Add command line flags for options, usage & version
-- [x] Add command line flags for start, end, length
-- [x] Add color support (greyed out zeros, line numbers, etc.)
-- [x] Add a screenshot or output samples to the README
-- [ ] Display offset in bytes of repetitions instead of line count
-- [ ] Improve performance even further
-- [ ] Add tests
-- [ ] ...
