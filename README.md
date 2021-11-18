@@ -3,6 +3,11 @@
 [![npm license](https://img.shields.io/npm/l/hxd.svg?style=flat-square)](https://npmjs.com/package/hxd)
 [![npm downloads](https://img.shields.io/npm/dm/hxd.svg?style=flat-square)](https://npmjs.com/package/hxd)
 
+## NOTE
+
+You might have ended up here looking for the hex editor [HxD](https://mh-nexus.de/en/hxd/).  
+Due to this naming conflict, this package will be renamed soon.
+
 <center>
 
 ![screenshot](screenshot.png)
